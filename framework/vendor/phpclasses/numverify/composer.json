@@ -1,0 +1,6 @@
+{
+	"autoload":
+	{
+		"classmap": ["numverify.class.php"]
+	}
+}
