@@ -57,24 +57,6 @@ function enqueue_select2_jquery() {
 }
 add_action( 'admin_enqueue_scripts', 'enqueue_select2_jquery' );
 
-
-// Ajouter bootsrtap dans l'administration
-
-function enqueue_bootstrap_jquery() {
-    wp_register_script ( 'uikit' , get_stylesheet_directory_uri() . '/js/uikit.js', array( 'jquery' ), '1', true );
-    wp_register_script ( 'uikit-icons' , get_stylesheet_directory_uri() . '/js/uikit-icons.js', '', '1', true );
-
-    wp_enqueue_script( 'uikit' );
-    wp_enqueue_script( 'uikit-icons' );
-
-    wp_register_style ( 'uikit' , get_stylesheet_directory_uri() . '/css/uikit.css', '' , '', 'all' );
-    wp_enqueue_style( 'uikit' );
-
-}
-add_action( 'admin_enqueue_scripts', 'enqueue_bootstrap_jquery' );
-
-
-
 function select2jquery_inline() {
 	?>
 <!--	<style type="text/css">-->
@@ -225,66 +207,6 @@ function datepicker_script(){
                 });
             }
 
-            if( $( '.datepicker_end_2' ).length > 0 ) {
-                $( '.datepicker_end_2' ).datepicker({
-                    language: 'fr-FR',
-                    format: 'dd/mm/yyyy',
-                    autoHide: true,
-                    pick: function (date) {
-                        $date_start = $(date.currentTarget).parent().prev().find('input.datepicker_start_2');
-                        $reforme_date_end_show = ('0' + date.date.getDate()).slice(-2)+'/'+( '0' + (date.date.getMonth()+1) ).slice( -2 )+'/'+date.date.getFullYear();
-                        $reforme_date_end = ''+( '0' + (date.date.getMonth()+1) ).slice( -2 )+'/'+date.date.getDate()+'/'+date.date.getFullYear();
-
-                        if($date_start){
-
-                            $reforme_date_start = "";
-
-                            if ($date_start.val() === ''){
-                                $date_start.val($reforme_date_end_show);
-                            }else{
-                                date_start_js = $date_start.val().split('/');
-                                $reforme_date_start = (date_start_js[1]) + '/' + date_start_js[0] + '/' + date_start_js[2];
-                            }
-
-
-                            if(new Date($reforme_date_end) <= new Date($reforme_date_start)){
-                                $date_start.val($reforme_date_end_show);
-                            }
-                        }
-                    }
-                });
-            }
-
-            if( $( '.datepicker_start_2' ).length > 0 ) {
-                $( '.datepicker_start_2' ).datepicker({
-                    language: 'fr-FR',
-                    format: 'dd/mm/yyyy',
-                    autoHide: true,
-                    pick: function (date) {
-                        $date_end = $(date.currentTarget).parent().next().find('input.datepicker_end_2');
-                        $reforme_date_start_show = ('0' + date.date.getDate()).slice(-2)+'/'+( '0' + (date.date.getMonth()+1) ).slice( -2 )+'/'+date.date.getFullYear();
-                        $reforme_date_start = ''+( '0' + (date.date.getMonth()+1) ).slice( -2 )+'/'+date.date.getDate()+'/'+date.date.getFullYear();
-
-                        if($date_end){
-
-                            $reforme_date_end = "";
-
-                            if ($date_end.val() === ''){
-                                $date_end.val($reforme_date_start_show);
-                            }else{
-                                date_end_js = $date_end.val().split('/');
-                                $reforme_date_end = (date_end_js[1]) + '/' + date_end_js[0] + '/' + date_end_js[2];
-                            }
-
-                            if(new Date($reforme_date_start) >= new Date($reforme_date_end)){
-                                $date_end.val($reforme_date_start_show);
-                            }
-                        }
-                    }
-                });
-            }
-
-
             if( $( '.datepicker_year_start' ).length > 0 ) {
                 $( '.datepicker_year_start' ).datepicker({
                     language: 'fr-FR',
@@ -362,7 +284,6 @@ function datepicker_script(){
 }
 
 add_action( 'wp_footer', 'datepicker_script');
-add_action( 'admin_footer', 'datepicker_script');
 
 function datepicker_script_admin(){
 	?>

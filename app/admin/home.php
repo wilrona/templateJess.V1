@@ -52,6 +52,7 @@ $boxAction->setCallback(function(){
 	echo $form->search('linkoffre')->setLabel('Lien de la page des offres d\'emploi')->setPostType('page');
 	echo $form->image('homeimageblock')->setLabel('Image de fond du block');
 	echo $form->text('newsletterimageblock')->setLabel('Texte au dessus de la newsletter');
+	echo $form->text('newslettercode')->setLabel('Shortcode de la newsletter');
 });
 
 

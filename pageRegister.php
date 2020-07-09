@@ -92,22 +92,7 @@ endif;
                                         </div>
 
                                         <div class="uk-margin-medium">
-                                            <?php
-                                            $villes = get_terms( array(
-                                                'taxonomy' => 'ville',
-                                                'hide_empty' => false
-                                            ) );
-                                            ?>
-                                            <select name="user_ville" id="" class="uk-select" >
-                                                <option value="">Sélectionnez la ville de residence</option>
-                                                <?php
-                                                foreach ($villes as $type):
-                                                    ?>
-                                                    <option value="<?= $type->term_id ?>" <?php if($data_redirect['user_ville'] === $type->term_id): ?> selected <?php endif; ?>> <?= $type->name ?></option>
-                                                <?php endforeach; ?>
-
-                                            </select>
-
+                                            <input class="uk-input" type="text" name="user_ville" placeholder="Ville de residence" required value="<?= $data_redirect['user_ville'] ?>">
                                         </div>
 
                                         <div class="uk-margin-medium">
@@ -127,16 +112,7 @@ endif;
                                         </div>
 
                                         <div class="uk-margin-medium">
-                                            <select name="user_sexe" id="" class="uk-select" required>
-                                                <option value="">Selection du sexe</option>
-                                                <option value="m" <?php if('m'== $data_redirect['user_sexe']): ?> selected <?php endif; ?>>Homme</option>
-                                                <option value="f" <?php if('f'== $data_redirect['user_sexe']): ?> selected <?php endif; ?>>Femme</option>
-                                            </select>
-                                        </div>
-
-
-                                        <div class="uk-margin-medium">
-                                            <input class="uk-input" type="number" name="user_enfant" min="0" id="number" placeholder="Nombre d'enfant" required value="<?= $data_redirect['user_enfant'] ?>">
+                                            <input class="uk-input" type="number" name="user_enfant" min="0" id="number" placeholder="Nombre d'enfant" required value="<?= $data_redirect['user_enfant']  ? $data_redirect['user_enfant'] : 0  ?>">
                                         </div>
 
                                         <div class="uk-margin-medium">

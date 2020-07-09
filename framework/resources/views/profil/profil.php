@@ -64,22 +64,7 @@
 									</div>
 
 									<div class="uk-margin-medium">
-                                        <?php
-                                        $villes = get_terms( array(
-                                            'taxonomy' => 'ville',
-                                            'hide_empty' => false
-                                        ) );
-                                        ?>
-                                        <select name="user_ville" id="" class="uk-select" >
-                                            <option value="">Sélectionnez la ville de residence</option>
-                                            <?php
-                                            foreach ($villes as $type):
-                                                ?>
-                                                <option value="<?= $type->term_id ?>" <?php if($type->term_id == $data_redirect['user_ville'] || $type->term_id == tr_users_field('user_ville', $current->ID)): ?> selected <?php endif; ?>> <?= $type->name ?></option>
-                                            <?php endforeach; ?>
-
-                                        </select>
-
+										<input class="uk-input" type="text" name="user_ville" placeholder="Ville de residence" required value="<?= $data_redirect['user_ville'] ? $data_redirect['user_ville'] : tr_users_field('user_ville', $current->ID) ?>">
 									</div>
 
 									<div class="uk-margin-medium">
@@ -97,17 +82,6 @@
 											<?php endforeach; ?>
 										</select>
 									</div>
-
-                                    <div class="uk-margin-medium">
-                                        <select name="user_sexe" id="" class="uk-select" <?php if(!empty(tr_users_field('user_sexe', $current->ID))): ?> disabled <?php endif; ?>>
-                                            <option value="">Selection du sexe</option>
-                                            <option value="m" <?php if('m'== $data_redirect['user_sexe'] || 'm' == tr_users_field('user_sexe', $current->ID)): ?> selected <?php endif; ?>>Homme</option>
-                                            <option value="f" <?php if('f'== $data_redirect['user_sexe'] || 'f' == tr_users_field('user_sexe', $current->ID)): ?> selected <?php endif; ?>>Femme</option>
-                                        </select>
-                                        <?php if(!empty(tr_users_field('user_sexe', $current->ID))): ?>
-                                            <input type="hidden" name="user_sexe" value="<?= tr_users_field('user_sexe', $current->ID) ?>">
-                                        <?php endif; ?>
-                                    </div>
 
 									<div class="uk-margin-medium">
 										<input class="uk-input" type="number" name="user_enfant" min="0" id="number" placeholder="Nombre d'enfant" required value="<?= $data_redirect['user_enfant'] ? $data_redirect['user_enfant'] : tr_users_field('user_enfant', $current->ID) ?>">

@@ -28,13 +28,11 @@ $box_karact->setCallback(function (){
 	$options = array('Selection d\'un employe' => null);;
 
 	foreach ($blogusers as $user){
-	    if(tr_users_field('user_sexe', $user->ID)):
-            $matricule = 'Non defini';
-            if(tr_users_field('matricule', $user->ID)){
-                $matricule = tr_users_field('matricule', $user->ID);
-            }
-            $options[$user->display_name.' ('. $matricule.')'] = $user->ID;
-		endif;
+		$matricule = 'Non defini';
+		if(tr_users_field('matricule', $user->ID)){
+			$matricule = tr_users_field('matricule', $user->ID);
+		}
+		$options[$user->display_name.' ('. $matricule.')'] = $user->ID;
 	}
 
 	echo $form->select('employee')->setLabel('Nom de l\'employe')->setOptions($options)->setAttribute('class', 'select');

@@ -1,3 +1,9 @@
+:root{
+    --primaire-color: #f83e19;
+    --secondary-color : #a71a16;
+    --blue-color : #112564;
+}
+
 body, h1,
 .uk-h1,
 h2,
@@ -31,7 +37,7 @@ h6,
 }
 
 .uk-navleft .uk-icon{
-    color: #a71a16 !important;
+    color: var(--primaire-color) !important;
 }
 
 .uk-header{
@@ -45,13 +51,13 @@ h6,
 }
 
 .uk-header .uk-subnav > * > :first-child {
-    color: #a71a16;
+    color: var(--primaire-color);
     font-weight: bolder !important;
 }
 
 .uk-header .uk-subnav.uk-subnav-pill > *.uk-active > a {
     color: #ffffff;
-    background-color: #a71a16;
+    background-color: var(--primaire-color);
 }
 
 
@@ -69,15 +75,17 @@ h6,
 }
 
 .uk-bgcolor-3{
-    background-color: #a71a16;
+    background-color: var(--primaire-color);
 }
 
 .uk-border-1{
-    border: 3px solid #a71a16;
+    border: 3px solid var(--primaire-color);
 }
 
 .uk-text-jess{
-    color: #a71a16;
+    color: var(--blue-color);
+    font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif;
+    font-weight: bold;
 }
 
 .uk-bgcolor-3-inverse{
@@ -107,9 +115,9 @@ h6,
 }
 
 .uk-button-jess, .uk-button-jess:hover {
-     background-color: #a71a16;
+     background-color: var(--primaire-color);
      color: #fff;
-     border: 1px solid #a71a16;
+     border: 1px solid var(--primaire-color);
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
     border-radius:10px;
@@ -159,7 +167,7 @@ a.uk-border-facebook{
 }
 
 .uk-offcanvas-jess > .uk-offcanvas-bar li.uk-active > a{
-    background: #a71a16 !important;
+    background: var(--primaire-color) !important;
     color: #fff !important;
     padding-left: 5px;
 }
@@ -180,18 +188,18 @@ a.uk-border-facebook{
 }
 
 .uk-card-jess .uk-card-header{
-    border-bottom: 2px solid #a71a16;
+    border-bottom: 2px solid var(--primaire-color);
 }
 
 .uk-card-jess .uk-card-title {
-    color: #a71a16;
+    color: var(--primaire-color);
     font-weight: bold;
 }
 
 .uk-jess-article .uk-card .uk-card-title, .uk-jess-article .uk-card  .uk-card-title a, .uk-jess-article .uk-card  .uk-card-title a:hover{
     font-size: 20px !important;
     font-weight: normal;
-    color: #a71a16;
+    color: var(--primaire-color);
     text-decoration: none;
 }
 
@@ -223,7 +231,7 @@ a.uk-border-facebook{
 }
 
 .uk-service .uk-tab > li.uk-active {
-    background-color: #a71a16;
+    background-color: var(--primaire-color);
 }
 
 .uk-service .uk-tab > li.uk-active > a {
@@ -234,18 +242,18 @@ a.uk-border-facebook{
 
 .uk-service .uk-tab > * > a {
     padding:  15px 30px !important;
-    color: #a71a16;
+    color: var(--primaire-color);
     font-weight: bold;
 }
 
 .uk-background-default-jess{
-    background-color: #a71a16;
+    background-color: var(--primaire-color);
 }
 
 
 .uk-input, .uk-select, .uk-textarea, .uk-input:focus, .uk-select:focus, .uk-textarea:focus{
     border: none;
-    border-bottom:  1px solid #a71a16;
+    border-bottom:  1px solid var(--primaire-color);
     background: transparent;
     padding: 0;
     color: #000000;
@@ -253,7 +261,7 @@ a.uk-border-facebook{
 }
 
 .uk-form-label{
-    color: #a71a16;
+    color: var(--primaire-color);
 }
 
 .uk-input-search, .uk-input-search:focus{
@@ -322,7 +330,7 @@ a.uk-border-facebook{
 }
 
 .job-list table tbody tr .title, .job-list table tbody tr .title a {
-    color: #a71a16;
+    color: var(--primaire-color);
 }
 .job-list table tbody tr .title a:hover{
     text-decoration: none;
@@ -358,7 +366,7 @@ a.uk-border-facebook{
 .uk-pagination > .uk-active > * {
     color: #fff;
     border-radius: 50%;
-    background: #a71a16;
+    background: var(--primaire-color);
     padding: 0px 9px;
 }
 
@@ -378,13 +386,13 @@ a.uk-border-facebook{
 
 .uk-accordion-title:hover, .uk-accordion-title:focus, .uk-accordion-title{
     color: #ffffff !important;
-    background-color: #a71a16 !important;
+    background-color: var(--primaire-color) !important;
     padding: 10px;
 }
 
 
 .uk-header-job{
-    border-bottom: 2px solid #a71a16;
+    border-bottom: 2px solid var(--primaire-color);
     padding: 13px 5px;
     font-size: 25px;
 }
@@ -402,11 +410,13 @@ a.uk-border-facebook{
     width: 100% !important;
 }
 
-
-.es_textbox_class, .es_textbox_class:focus {
+.es-field-wrap label{
+    display: flex !important;
+}
+.es-field-wrap input, .es-field-wrap input:focus {
     border: none !important;
     background: #f7f7f7;
-    /*padding: 0 10px !important;*/
+    padding: 0 10px !important;
     color: #000000;
     font-size: 18px !important;
     border-radius: 10px !important;

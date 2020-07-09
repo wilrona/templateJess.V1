@@ -14,13 +14,10 @@ include( 'app/init.php' );
 
 tr_frontend();
 
-
-add_action('init', 'start_session', 1);
-
-function start_session() {
-    if(!session_id()) {
-        session_start();
-    }
+//Ensure that a session exists (just in case)
+if( !session_id() )
+{
+	session_start();
 }
 
 
@@ -34,38 +31,31 @@ function start_session() {
  */
 function flash( $name = '', $message = '', $class = 'uk-alert-success' )
 {
-    //We can only do something if the name isn't empty
-    if( !empty( $name ) )
-    {
-
-        //No message, create it
-        if( !empty( $message ) && empty( $_SESSION[$name] ) )
+	//We can only do something if the name isn't empty
+	if( !empty( $name ) )
+	{
+		//No message, create it
+		if( !empty( $message ) && empty( $_SESSION[$name] ) )
         {
-            if( !empty( $_SESSION[$name] ) )
-            {
-                unset( $_SESSION[$name] );
-            }
-            if( !empty( $_SESSION[$name.'_class'] ) )
-            {
-                unset( $_SESSION[$name.'_class'] );
-            }
+	        if( !empty( $_SESSION[$name] ) )
+	        {
+		        unset( $_SESSION[$name] );
+	        }
+	        if( !empty( $_SESSION[$name.'_class'] ) )
+	        {
+		        unset( $_SESSION[$name.'_class'] );
+	        }
 
-            $_SESSION[$name] = $message;
-            $_SESSION[$name.'_class'] = $class;
+	        $_SESSION[$name] = $message;
+	        $_SESSION[$name.'_class'] = $class;
         }
         //Message exists, display it
         elseif( !empty( $_SESSION[$name] ) && empty( $message ) )
         {
-            $class = !empty( $_SESSION[$name.'_class'] ) ? $_SESSION[$name.'_class'] : 'uk-alert-success';
-            echo '<div class="'.$class.'" uk-alert> <a class="uk-alert-close" uk-close></a> <p>'.$_SESSION[$name].'</p></div>';
-            unset($_SESSION[$name]);
-            unset($_SESSION[$name.'_class']);
+	        $class = !empty( $_SESSION[$name.'_class'] ) ? $_SESSION[$name.'_class'] : 'uk-alert-success';
+	        echo '<div class="'.$class.'" uk-alert> <a class="uk-alert-close" uk-close></a> <p>'.$_SESSION[$name].'</p></div>';
+	        unset($_SESSION[$name]);
+	        unset($_SESSION[$name.'_class']);
         }
     }
 }
-
-
-
-
-
-

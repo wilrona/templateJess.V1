@@ -18,6 +18,8 @@ $form = tr_form()->useJson()->setGroup( $this->getName() );
 		echo $form->text('facebook')->setLabel('Lien de la page facebook');
 		echo $form->text('tweeter')->setLabel('Lien du compte tweeter');
 		echo $form->text('linkedin')->setLabel('Lien de la page linkedin');
+		echo $form->image('logodesktop')->setLabel('Logo pour la version desktop');
+		echo $form->image('logomobile')->setLabel('Logo pour la version mobile');
 	};
 
 

@@ -71,7 +71,7 @@
 									<td class="uk-width-auto content">
 										<h1 class="title uk-h2"><?php the_title() ?></h1>
 										<div class="span"><span uk-icon="icon: file-edit" class="uk-margin-small-right"></span><?= get_term(tr_posts_field('type_contrat'))->name ?></div>
-										<div class="span"><span uk-icon="icon: location" class="uk-margin-small-right"></span><?= get_term(tr_posts_field('ville'))->name ?></div>
+										<div class="span"><span uk-icon="icon: location" class="uk-margin-small-right"></span><?= tr_posts_field('ville') ?></div>
 										<div class="span"><span uk-icon="icon: calendar" class="uk-margin-small-right"></span><?php sky_date_french('d F Y', get_post_time('U', true), 1); ?></div>
 <!--										<div class="span"><span uk-icon="icon: home" class="uk-margin-small-right"></span>--><?//= tr_posts_field('entreprisecontact') ?><!--</div>-->
 									</td>

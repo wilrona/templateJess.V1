@@ -172,9 +172,6 @@ $boxCandidat->setCallback(function (){
 	<p class="post-attributes-label-wrapper"><label class="post-attributes-label">Date de naissance</label></p>
 	<span><?= tr_users_field('user_birth', $current_user->ID) ?></span>
 	<hr>
-    <p class="post-attributes-label-wrapper"><label class="post-attributes-label">Sexe</label></p>
-    <span><?= tr_users_field('user_sexe', $current_user->ID) === 'm' ? 'Masculin' : 'Féminin'; ?></span>
-    <hr>
 	<p class="post-attributes-label-wrapper"><label class="post-attributes-label">Situation Matriminiale</label></p>
 	<span><?= get_term(tr_users_field('user_matrimonial', $current_user->ID))->name ?></span>
 	<hr>
@@ -182,7 +179,7 @@ $boxCandidat->setCallback(function (){
 	<span><?= tr_users_field('user_enfant', $current_user->ID) ?></span>
 	<hr>
 	<p class="post-attributes-label-wrapper"><label class="post-attributes-label">Ville de residence</label></p>
-	<span><?= get_term(tr_users_field('user_ville', $current_user->ID))->name ?></span>
+	<span><?= tr_users_field('user_ville', $current_user->ID) ?></span>
 	<hr>
 	<p class="post-attributes-label-wrapper"><label class="post-attributes-label">Numéro de téléphone</label></p>
 	<span><?= tr_users_field('user_phone', $current_user->ID) ?></span>
@@ -201,7 +198,7 @@ $boxCandidat->setCallback(function (){
     <hr>
     <div id="major-publishing-actions">
         <div id="publishing-action" style="text-align: center !important;">
-            <a href="<?= home_url('/candidat/print/'.$post->ID) ?>" class="button button-primary button-large" target="_blank" id="publish">Imprimer le CV</a>
+            <a href="" class="button button-primary button-large" target="_blank" id="publish">Imprimer le CV</a>
         </div>
     </div>
 
@@ -209,16 +206,6 @@ $boxCandidat->setCallback(function (){
 
 <?php
 });
-
-add_filter('get_sample_permalink_html', 'my_hide_permalinks', 10, 5);
-
-function my_hide_permalinks($return, $post_id, $new_title, $new_slug, $post)
-{
-    if($post->post_type == 'curriculum') {
-        return '';
-    }
-    return $return;
-}
 
 
 //function wpse_76815_remove_publish_box() {

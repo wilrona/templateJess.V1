@@ -1,6 +1,3 @@
 # Created by .ignore support plugin (hsz.mobi)
-.gitignore
-.idea/inspectionProfiles/
-.idea/vcs.xml
-.idea/workspace.xml
-wp-job-manager-backup-201707201142200.pot~
+/.idea/
+/framework/vendor/

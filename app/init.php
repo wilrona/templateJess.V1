@@ -1,8 +1,5 @@
 <?php
 
-
-include ('config/dashboard.php');
-
 include( 'config/menu.config.php' );
 //include( 'config/database.php' );
 include( 'config/support.config.php' );
@@ -14,7 +11,6 @@ include ('theme/menu.frontend.php');
 include ('theme/filter.menu.php');
 //include ('theme/filter.title.php');
 //include ('theme/ajax.post.php');
-include ('theme/ajax.stat.php');
 //include ('theme/post.popular.php');
 
 

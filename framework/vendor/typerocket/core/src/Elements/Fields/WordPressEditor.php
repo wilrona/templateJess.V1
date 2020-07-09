@@ -6,9 +6,6 @@ use \TypeRocket\Utility\Sanitize;
 class WordPressEditor extends Field implements ScriptField
 {
 
-    public $incremental = false;
-    public static $count = 0;
-
     /**
      * Run on construction
      */
@@ -22,17 +19,6 @@ class WordPressEditor extends Field implements ScriptField
      */
     public function enqueueScripts() {
         wp_enqueue_media();
-    }
-
-    /**
-     * Increment field ID on echo
-     *
-     * @return $this
-     */
-    public function increment()
-    {
-        $this->incremental = true;
-        return $this;
     }
 
     /**
@@ -55,14 +41,9 @@ class WordPressEditor extends Field implements ScriptField
         );
 
         $settings = array_merge( $defaults, $settings, $override );
-        $increment = '';
-
-        if($this->incremental) {
-            $increment = (WordPressEditor::$count++) . '_';
-        }
 
         ob_start();
-        wp_editor( $value, 'wp_editor_' . $increment . $this->getName(), $settings );
+        wp_editor( $value, 'wp_editor_' . $this->getName(), $settings );
         $html = ob_get_clean();
 
         return $html;

@@ -16,8 +16,14 @@
         <div class="uk-width-expand@l uk-width-1-1@s uk-left-menu uk-padding-small uk-padding-remove-bottom">
             <div class="uk-bgcolor-2 uk-padding-small uk-flex uk-flex-center uk-hidden@s">
                 <div>
-                    <a href="#" uk-icon="icon: menu;" uk-toggle="target: #offcanvas-overlay"></a>
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="">
+                    <a href="#" uk-icon="icon: menu;" uk-toggle="target: #offcanvas-overlay" class="uk-margin-small-right"></a>
+                    <?php
+                        $logomobile = get_template_directory_uri()."/images/logo.png";
+                        if(tr_options_field('pc_options.logomobile')){
+                            $logomobile = wp_get_attachment_image_src(tr_options_field('pc_options.logomobile'), 'full')[0];
+                        }
+                    ?>
+                    <img src="<?php echo $logomobile; ?>" alt="">
                 </div>
             </div>
             <h1 class="uk-margin-medium-top uk-margin-small-bottom uk-text-jess"><?php the_title() ?></h1>
@@ -145,8 +151,8 @@
                     </div>
                     <div class="uk-width-1-2@l uk-flex uk-flex-right uk-flex-middle">
 	                    <div class="uk-background-default uk-padding uk-width-4-5@l">
-                            <h2 class="uk-text-center uk-margin-bottom uk-h1"><?= tr_posts_field('newsletterimageblock') ?></h2>
-		                    <?php es_subbox($namefield = "YES", $desc = "", $group = "Public"); ?>
+                            <h2 class="uk-text-center uk-margin-bottom uk-h2"><?= tr_posts_field('newsletterimageblock') ?></h2>
+		                    <?php echo do_shortcode(tr_posts_field('newslettercode')); ?>
                         </div>
                     </div>
                 </div>

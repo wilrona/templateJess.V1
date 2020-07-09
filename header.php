@@ -46,7 +46,14 @@
     <div id="offcanvas-overlay" uk-offcanvas="overlay: true" class="uk-offcanvas-jess">
         <div class="uk-offcanvas-bar uk-position-relative uk-height-1-1">
 
-            <a href="<?= home_url() ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" class="uk-display-block uk-margin-auto" alt=""></a>
+            <?php
+                $logomobile = get_template_directory_uri()."/images/logo.png";
+                if(tr_options_field('pc_options.logomobile')){
+                    $logomobile = wp_get_attachment_image_src(tr_options_field('pc_options.logomobile'), 'full')[0];
+                }
+            ?>
+
+            <a href="<?= home_url() ?>"><img src="<?php echo $logomobile; ?>" class="uk-display-block uk-margin-auto" alt=""></a>
 
             <?php
             $menu_arg = array(
@@ -65,19 +72,26 @@
                 </div>
                 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                <span class="uk-text-small">Desgin by <a href="#" target="_blank">aligodu</a></span>
+                <span class="uk-text-small">Design by <a href="http://aligodu.cm">Aligodu</a></span>
             </div>
 
         </div>
     </div>
     <div class="uk-width-xsmall uk-box-shadow-medium uk-height-1-1 uk-navleft uk-bgcolor-1 uk-visible@s" uk-height-viewport>
         <div class="uk-bgcolor-2 uk-padding uk-padding-remove-horizontal uk-padding-remove-bottom">
+            <?php
 
-            <a href="<?= home_url() ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo-icone.png" class="uk-display-block uk-margin-auto" alt=""></a>
+                $logodesktop = get_template_directory_uri()."/images/logo-icone.png";
+                if(tr_options_field('pc_options.logodesktop')){
+                    $logodesktop = wp_get_attachment_image_src(tr_options_field('pc_options.logodesktop'), 'full')[0];
+                }
+            ?>
+            <a href="<?= home_url() ?>"><img src="<?php echo $logodesktop; ?>" class="uk-display-block uk-margin-auto" alt=""></a>
         </div>
 
         <div class="uk-padding-small uk-text-center">
             <a href="#" uk-icon="icon: menu; ratio: 2" uk-toggle="target: #offcanvas-overlay"></a>
+            Menu
         </div>
 
         <div class="uk-position-bottom-center uk-padding-small uk-text-center">

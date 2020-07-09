@@ -1,8 +1,6 @@
 <?php
 namespace App\Controllers;
 
-use Dompdf\Dompdf;
-use Mpdf\Mpdf;
 use \TypeRocket\Controllers\Controller;
 use WP_Query;
 use WP_User;
@@ -12,7 +10,7 @@ class MemberController extends Controller
 
 	public function routing()
 	{
-		$this->setMiddleware('not_member', ['only' => ['login', 'logout', 'register', 'reset', 'pdfgenerated']]);
+		$this->setMiddleware('not_member', ['only' => ['login', 'logout', 'register', 'reset']]);
 //		$this->setMiddleware('member', ['only' => ['profil', 'alerte', 'createcv', 'editcv']]);
 	}
 
@@ -78,7 +76,6 @@ class MemberController extends Controller
 			   empty($_POST['user_email']) ||
 			   empty($_POST['user_birth'])  ||
 			   empty($_POST['user_ville']) ||
-			   empty($_POST['user_sexe']) ||
 			   intval($_POST['user_enfant']) < 0 ||
 			   empty($_POST['user_phone']) ||
 			   empty($_POST['user_matrimonial'])
@@ -87,13 +84,13 @@ class MemberController extends Controller
 
 			else:
 				$numVerify = new \numVerify();
-                $isValid = $numVerify->isValid($_POST['user_phone'], 'CM', false, true);
+                $isValid = $numVerify->isValid($_POST['user_phone'], 'CM');
 
 				if(!is_email($_POST['user_email'])):
 					flash('error_register', 'Veuillez entrer un email valide.', 'uk-alert-danger');
 
-				elseif(!$isValid):
-					flash('error_register', 'Le format du numero n\'est pas correct.', 'uk-alert-danger');
+//				elseif(!$isValid):
+//					flash('error_register', 'Le format du numero n\'est pas correct.', 'uk-alert-danger');
 				else:
 					if(isset( $_POST['user_pass'] ) && $_POST['user_pass'] != $_POST['user_pass_2']):
 						flash('error_register', 'Les deux mots de passe ne correspondent pas', 'uk-alert-danger');
@@ -112,7 +109,6 @@ class MemberController extends Controller
 						else:
 
 							add_user_meta( $user, 'user_ville', $_POST['user_ville'], true );
-							add_user_meta( $user, 'user_sexe', $_POST['user_sexe'], true );
 							add_user_meta( $user, 'user_enfant', $_POST['user_enfant'], true );
 							add_user_meta( $user, 'user_matrimonial', $_POST['user_matrimonial'], true );
 							add_user_meta( $user, 'user_birth', $_POST['user_birth'], true );
@@ -461,7 +457,6 @@ class MemberController extends Controller
 //			   empty($_POST['user_email']) ||
 			   empty($_POST['user_birth'])  ||
 			   empty($_POST['user_ville']) ||
-			   empty($_POST['user_sexe']) ||
 			   intval($_POST['user_enfant']) < 0 ||
 			   empty($_POST['user_phone']) ||
 			   empty($_POST['user_matrimonial'])
@@ -488,7 +483,6 @@ class MemberController extends Controller
 						else:
 
 							update_user_meta( $user, 'user_ville', $_POST['user_ville']);
-							update_user_meta( $user, 'user_sexe', $_POST['user_sexe']);
 							update_user_meta( $user, 'user_enfant', $_POST['user_enfant']);
 							update_user_meta( $user, 'user_matrimonial', $_POST['user_matrimonial']);
 							update_user_meta( $user, 'user_birth', $_POST['user_birth']);
@@ -1511,196 +1505,4 @@ class MemberController extends Controller
 
 	    return tr_view('profil/candidature', ['data' => $candidature]);
     }
-
-    public function pdfgenerated($id){
-
-
-
-            $current_cv = get_post($id);
-
-            $current_user = tr_posts_field('user_cv', $id);
-            $current_user = get_user_by('id', $current_user);
-
-            // instantiate and use the dompdf class
-            ob_start();
-            ?>
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-        <html>
-        <head>
-
-            <title>Jonathan Doe | Web Designer, Director | name@yourdomain.com</title>
-            <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-            <meta name="keywords" content="" />
-            <meta name="description" content="" />
-
-            <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/cv/reset-fonts-grids.css" media="all" />
-            <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/cv/resume.css" media="all" />
-            <style>
-                @page{
-                    margin: 0cm 0cm;
-                }
-
-                body{
-                    margin-top: 2cm;
-                    margin-left: 2cm;
-                    margin-right: 2cm;
-                    margin-bottom: 2cm;
-                }
-            </style>
-        </head>
-        <body>
-        <main>
-            <div id="doc1" class="yui-t7" style="width: 100% !important;">
-                <div id="inner" style="margin: 0 !important;">
-
-                    <div id="hd">
-                        <div class="yui-gc">
-                            <div class="yui-u first">
-                                <h1><?= $current_cv->post_title ?></h1>
-                                <?php
-                                $exp_pro = '';
-
-                                $terms_exp_pro = get_terms( array(
-                                    'taxonomy' => 'niveau',
-                                    'hide_empty' => false
-                                ) );
-
-                                foreach ($terms_exp_pro as $exp){
-                                    $min = tr_taxonomies_field('nbre_min', 'niveau', $exp->term_id);
-                                    $max = tr_taxonomies_field('nbre_max', 'niveau', $exp->term_id);
-                                    if(tr_posts_field('duree_exp_pro') >= $min && tr_posts_field('duree_exp_pro') <=  $max ) {
-                                        $exp_pro = $exp->name;
-                                    }
-                                }
-                                ?>
-                                <h2><?php if(!empty($exp_pro)): ?> <?= $exp_pro.", " ?> <?php endif; ?> <?= tr_users_field('user_ville', $current_user->ID) ?></h2>
-                            </div>
-
-                            <div class="yui-u">
-                                <div class="contact-info" style="text-align: right">
-                                    <h2>NO <?= $id ?></h2>
-                                </div><!--// .contact-info -->
-                            </div>
-                        </div><!--// .yui-gc -->
-                    </div><!--// hd -->
-
-                    <div id="bd">
-                        <div id="yui-main">
-                            <div class="yui-b">
-
-                                <div class="yui-gf">
-                                    <div class="yui-u first">
-                                        <h2>Profil</h2>
-                                    </div>
-                                    <div class="yui-u">
-                                        <div class="contact-info">
-                                            <h3>Né le <?= tr_users_field('user_birth', $current_user->ID) ?></h3>
-                                            <h3><?= get_term(tr_users_field('user_matrimonial', $current_user->ID))->name ?>, <?= tr_users_field('user_enfant', $current_user->ID) ?> enfant(s)</h3>
-                                        </div><!--// .contact-info -->
-                                        <p class="enlarge" style="padding: 0 !important;">
-                                            <?= $current_cv->post_content; ?>
-                                        </p>
-                                    </div>
-                                </div><!--// .yui-gf -->
-
-                                <div class="yui-gf">
-                                    <div class="yui-u first">
-                                        <h2>Compétence</h2>
-                                    </div>
-                                    <div class="yui-u">
-
-                                        <?php
-                                        foreach (tr_posts_field('competencecv', $id) as $compet):
-                                            ?>
-                                            <div class="" style="display: inline-block;">
-                                                <h2><?= get_term($compet, 'competence')->name ?></h2>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    </div>
-                                </div><!--// .yui-gf -->
-
-                                <div class="yui-gf">
-
-                                    <div class="yui-u first">
-                                        <h2>Experience Prof.</h2>
-                                    </div><!--// .yui-u -->
-
-                                    <div class="yui-u">
-
-
-                                        <?php
-
-                                            foreach (tr_posts_field('exp_prof', $id) as $exp_prof):
-                                        ?>
-
-                                        <div class="job last">
-                                            <h2><?= $exp_prof['nom_entreprise'] ? $exp_prof['nom_entreprise'] : ""; ?></h2>
-                                            <h3><?= $exp_prof['date_debut_emploi'] ? $exp_prof['date_debut_emploi'] : ""; ?>-<?= $exp_prof['date_fin_emploi'] ? $exp_prof['date_fin_emploi'] : ""; ?></h3>
-<!--                                            <h4></h4>-->
-                                            <p>
-                                                <?= $exp_prof['description_poste'] ? $exp_prof['description_poste'] : ""; ?>
-                                            </p>
-                                        </div>
-
-                                        <?php
-                                            endforeach;
-                                        ?>
-
-                                    </div><!--// .yui-u -->
-                                </div><!--// .yui-gf -->
-
-
-                                <div class="yui-gf last">
-                                    <div class="yui-u first">
-                                        <h2>Expérience Academique</h2>
-                                    </div>
-                                    <?php
-                                        foreach (tr_posts_field('exp_academic', $id) as $exp_academic):
-                                    ?>
-                                    <div class="yui-u">
-                                        <h2><?= get_term($exp_academic['diplome_academic'])->name ?> - <?= $exp_academic['annee_debut_academic'] ? $exp_academic['annee_debut_academic'] : ""; ?>/<?= $exp_academic['annee_fin_academic'] ? $exp_academic['annee_fin_academic'] : ""; ?></h2>
-                                        <h3><?= $exp_academic['ecole_academic'] ? $exp_academic['ecole_academic'] : ""; ?></h3>
-                                    </div>
-                                    <?php
-                                        endforeach;
-                                    ?>
-                                </div><!--// .yui-gf -->
-
-
-                            </div><!--// .yui-b -->
-                        </div><!--// yui-main -->
-                    </div><!--// bd -->
-
-                    <div id="ft">
-                        <p>CV en provenance de Jess Assistance SARL &mdash; Contactez-nous pour plus d'information </p>
-                    </div><!--// footer -->
-
-                </div><!-- // inner -->
-
-
-            </div><!--// doc -->
-        </main>
-
-
-
-        </body>
-        </html>
-            <?php
-            $html = ob_get_clean();
-
-            $dompdf = new Dompdf();
-            $dompdf->loadHtml($html);
-
-            // (Optional) Setup the paper size and orientation
-            $dompdf->setPaper('A4');
-
-            // Render the HTML as PDF
-            $dompdf->render();
-
-            // Output the generated PDF to Browser
-            $dompdf->stream('cv-'.$id.'.pdf', array("Attachment"=>1, 'compress' => 0));
-
-    }
-
 }

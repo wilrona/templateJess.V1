@@ -193,7 +193,7 @@
 													<li>
 														<?php
 															$types = get_terms( array(
-																'taxonomy' => 'niveau_professionnel',
+																'taxonomy' => 'niveau',
 																'hide_empty' => false
 															) );
 														?>

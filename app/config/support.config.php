@@ -45,21 +45,21 @@ function my_lost_password_page( $lostpassword_url, $redirect ) {
 //add_filter( 'category_template', 'wpd_subcategory_template' );
 
 // Délimitation du resultat du moteur de recherche
-//
-//add_action( 'pre_get_posts', function( $query ) {
-//
-//	// Check that it is the query we want to change: front-end search query
-//	if( $query->is_main_query() && ! is_admin() && $query->is_search() ) {
-//
-//		// Change the query parameters
-//		$query->set( 'posts_per_page', 10 );
-//		$query->set( 'post_type', 'post' );
-//		$query->set( 'paged', 1 );
-//		$query->set( 'post_status', 'publish' );
-//
-//	}
-//
-//} );
+
+add_action( 'pre_get_posts', function( $query ) {
+
+	// Check that it is the query we want to change: front-end search query
+	if( $query->is_main_query() && ! is_admin() && $query->is_search() ) {
+
+		// Change the query parameters
+		$query->set( 'posts_per_page', 10 );
+		$query->set( 'post_type', 'post' );
+		$query->set( 'paged', 1 );
+		$query->set( 'post_status', 'publish' );
+
+	}
+
+} );
 
 
 function sky_date_french($format, $timestamp = null, $echo = null) {
@@ -136,4 +136,3 @@ function remove_menus(){
 //	remove_menu_page( 'options-general.php' );        //Settings
 
 }
-

@@ -171,24 +171,6 @@
 
                     $get_location = $_GET['location'];
 
-                    $args = array(
-                        'taxonomy'      => 'ville', // taxonomy name
-                        'hide_empty'    => false,
-                        'fields'        => 'all',
-                        'name__like'    => $_GET['keywords']
-                    );
-
-	                $terms_ville = get_terms( $args );
-
-                    $terms_vil = array();
-                    foreach ($terms_ville as $terms){
-                        array_push($terms_vil, ''.$terms->term_id.'');
-                    }
-
-                    if(!sizeof($terms_vil)){
-                        array_push($terms_vil, '0');
-                    }
-
 	                $custom_args_q1 = array(
 		                'post_type' => 'emploi',
 		                'posts_per_page' => 10,
@@ -196,9 +178,9 @@
 		                'meta_query' => array(
 			                'relation' => 'OR',
 			                array(
-                                'key'     => 'ville',
-                                'value'   => $terms_vil,
-                                'compare' => 'IN',
+				                'key'     => 'ville',
+				                'value'   => $_GET['location'],
+				                'compare' => 'LIKE',
 			                )
 		                )
 	                );

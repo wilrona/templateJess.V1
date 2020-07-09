@@ -17,7 +17,7 @@
                 </div>
                 <div class="uk-width-1-1 uk-text-center uk-padding-small uk-padding-remove-horizontal uk-padding-remove-bottom" style="color: #000000">
                     <p>Toutes nos offres sont ouvertes aux personnes en situation de handicap</p>
-                    <p>©<?= date('Y') ?> Jess Assistance - Tous droits réservés</p>
+                    <p>©<?= date('Y') ?> Jess Assistance - Tous droits réservés. Design by <a href="http://aligodu.cm">Aligodu</a></p>
                 </div>
             </div>
         </div>

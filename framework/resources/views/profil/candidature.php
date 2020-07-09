@@ -53,7 +53,7 @@
                                             <td class="uk-width-expand content">
                                                 <p class="title"><a href="<?php the_permalink($current->ID) ?>" target="_blank"><?= $current->post_title ?></a></p>
                                                 <div class="span"><span uk-icon="icon: file-edit" class="uk-margin-small-right"></span><?= get_term(tr_posts_field('type_contrat', $current->ID))->name ?></div>
-                                                <div class="span"><span uk-icon="icon: location" class="uk-margin-small-right"></span><?= get_term(tr_posts_field('ville', $current->ID))->name ?></div>
+                                                <div class="span"><span uk-icon="icon: location" class="uk-margin-small-right"></span><?= tr_posts_field('ville', $current->ID) ?></div>
                                                 <div class="span"><span uk-icon="icon: calendar" class="uk-margin-small-right"></span><?php sky_date_french('d F Y', get_post_time('U', true, $current->ID), 1); ?></div>
                                                 <div class="span"><span uk-icon="icon: hashtag" class="uk-margin-small-right"></span><?= get_term(tr_posts_field('niveau_professionnel', $current->ID))->name; ?></div>
                                             </td>

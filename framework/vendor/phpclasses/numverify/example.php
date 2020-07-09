@@ -1,7 +1,7 @@
 <?php
 /*
 verify phone number
-numverify ver 1.0
+numverify ver 0.1
 */
 
 //include the class
@@ -11,36 +11,33 @@ include('numverify.class.php');
 $numVerify = new numVerify();
 
 //phone number to check
-//API can accept all numeric numbers or number with special characters like (555) 5555-55555
+//API can accept all numberic numbers or number with special characters like (555) 5555-55555
 $phoneNumber = 'ADD_A_PHONE_NUMBER_HERE';
 
 //logic to determine if number is valid, invalid or an error occured
-if( $numVerify->isValid($phoneNumber,'US',false,true) === false ){
-
+if( $numVerify->isValid($phoneNumber,'US') === false ){
+    
     if( !empty($numVerify->errorCode) ){
         //an error occured
-
+        
         echo 'The request returned an error -> ['.$numVerify->errorCode.'] '.$numVerify->errorText;
-
+        
     }else{
         //number is not valid
-
+        
         echo 'The phone number '.$phoneNumber.' is NOT valid';
-
+        
     }
-
+        
 }else{
     //number is valid
-
+    
     echo 'The phone number '.$phoneNumber.' is valid';
-
+    
 }
 
 //display the response object
-echo '<hr>';
-echo '<pre>';
 var_dump($numVerify->response);
-echo '</pre>';
 
 /*
 a validation request will return the following object properties
